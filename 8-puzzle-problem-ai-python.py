@@ -1,6 +1,3 @@
-from code import main
-
-
 def move(ar,p,st):
 	rh=999999
 	store_st= st.copy()	#making state copy to store the state
@@ -38,10 +35,7 @@ def count(s):
 										# we will not consider zero as it has 
 										# to come on end of puzzle 
 
-state = [ 	1, 2, 3, 
-			0, 5, 6,			#input Puzzle state
-			4, 7, 8
-		]
+state = [ 1,2,3,0,4,6,7,5,8]
 h = count(state)
 Level = 1
 
