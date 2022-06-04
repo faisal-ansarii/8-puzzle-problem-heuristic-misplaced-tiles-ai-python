@@ -1,19 +1,19 @@
-def move(ar,p,st):
-	rh=999999
+
+def move(ar,pos,st):
+	rh=999999 # this is the max value of heuristic  
 	store_st= st.copy()	#making state copy to store the state
 
 	for i in range(len(ar)):
-		dupl_st= st.copy()
+		dupl_st= st.copy() #duplicating the state
 
-		temp = dupl_st[p]
-		dupl_st[p] = dupl_st[arr[i]]
-		dupl_st[arr[i]] = temp
-
-		temp_rh = count(dupl_st)
-		if temp_rh < rh:
-			rh = temp_rh
-			store_st = dupl_st.copy()
-	return store_st,rh
+		temp = dupl_st[pos]   #swapping the value of zero with the value of the position of zero
+		dupl_st[pos] = dupl_st[arr[i]] #swapping the value of zero with the value of the position of zero
+		dupl_st[arr[i]] = temp #swapping the value of zero with the value of the position of zero
+		temp_rh = count(dupl_st) #calculating the heuristic of the state
+		if temp_rh < rh: #if the heuristic is less than the previous heuristic then replace the state
+			rh = temp_rh #replace the heuristic
+			store_st = dupl_st.copy() #replace the state
+	return store_st,rh #return the state and the heuristic
 
 def print_in_format(matrix):
 	for i in range(9):
@@ -29,25 +29,20 @@ def count(s):
 	for i in range(9):
 		if s[i] != 0 and s[i]!=ideal[i]: # we dont check if zero occur
 			c+=1						 # we only check for the example s[1]=1 then  
-	return c							# S[1]=ideal[1] it matches so it will 
-										# not count the misplaced tile 
-										# if its not equal then count
-										# we will not consider zero as it has 
-										# to come on end of puzzle 
+	return c	# S[1]=ideal[1] it matches so it will not count the misplaced tile  if its not equal then count we will not consider zero as it has to come on end of puzzle 
 
 state = [ 1,2,3,0,4,6,7,5,8]
 h = count(state)
 Level = 1
 
-print("\n-----------Lever "+str(Level)+"---------------")
+print("\n-----------Level "+str(Level)+"---------------")
 print_in_format(state)
 print("\nHeuristic Value (Misplaced) : "+str(h))
 
 while h > 0:
 	pos = int(state.index(0))
 	Level+=1
-	if pos == 0:				# here we check for possible moves 
-								# where t he empty puzzle can go
+	if pos == 0:		# here we check for possible moves where the empty puzzle can go
 		arr=[1,3]
 		state, h = move (arr,pos,state)
 	elif pos == 1:
@@ -75,6 +70,6 @@ while h > 0:
 		arr=[5,7]
 		state, h = move (arr,pos,state)
 	
-	print("\n-----------Lever "+str(Level)+"---------------")
+	print("\n-----------Level "+str(Level)+"---------------")
 	print_in_format(state)
 	print("\nHeuristic Value (Misplaced) : "+str(h))
